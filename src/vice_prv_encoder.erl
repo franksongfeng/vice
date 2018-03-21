@@ -40,23 +40,33 @@ init({Type, [Encoder|Rest]}) ->
 
 % @hidden
 handle_call({infos, File, Options}, _, #state{encoder = Encoder,
-                                     state = EncoderState} = State) ->
-  try
-    Reply = erlang:apply(Encoder, infos, [EncoderState, File, Options]),
-    {reply, Reply, State}
-  catch
-    _:_ ->
-      {reply, {error, infos_not_availables}, State}
+                                              state = EncoderState} = State) ->
+  case filelib:is_regular(File) of
+    true ->
+      try
+        Reply = erlang:apply(Encoder, infos, [EncoderState, File, Options]),
+        {reply, Reply, State}
+      catch
+        _:_ ->
+          {reply, {error, infos_not_availables}, State}
+      end;
+    false ->
+      {reply, {error, file_not_found}, State}
   end;
 % @hidden
-handle_call({info, File, Info}, _, #state{encoder = Encoder,
-                                          state = EncoderState} = State) ->
-  try
-    Reply = erlang:apply(Encoder, info, [EncoderState, File, Info]),
-    {reply, Reply, State}
-  catch
-    _:_ ->
-      {reply, {error, info_not_availables}, State}
+handle_call({info, File, Info, Options}, _, #state{encoder = Encoder,
+                                                   state = EncoderState} = State) ->
+  case filelib:is_regular(File) of
+    true ->
+      try
+        Reply = erlang:apply(Encoder, info, [EncoderState, File, Info, Options]),
+        {reply, Reply, State}
+      catch
+        _:_ ->
+          {reply, {error, info_not_availables}, State}
+      end;
+    false ->
+      {reply, {error, file_not_found}, State}
   end;
 handle_call(_Request, _From, State) ->
   Reply = ok,
@@ -169,4 +179,3 @@ get_preset_file(Options, Type) ->
     false ->
       undefined
   end.
-

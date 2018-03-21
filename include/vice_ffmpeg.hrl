@@ -4,6 +4,7 @@
   {canvas_size,            global, "-canvas_size",           [{{erlang, is_integer}, to_arg}]},
   {filter_complex,         global, "-filter_complex",        [{{erlang, is_list}, to_arg}, {{erlang, is_binary}, to_arg}]},
   {filter_complex_script,  global, "-filter_complex_script", [{{erlang, is_list}, to_arg}, {{erlang, is_binary}, to_arg}]},
+  {allowed_extensions,     global, "-allowed_extensions",    [{{erlang, is_list}, to_arg}, {{erlang, is_binary}, to_arg}]},
 
   {input_position,         input,  "-ss",                    [{{erlang, is_list}, to_arg}, {{erlang, is_binary}, to_arg}, {{erlang, is_integer}, to_arg}]},
   {input_eof_position,     input,  "-sseof",                 [{{erlang, is_list}, to_arg}, {{erlang, is_binary}, to_arg}, {{erlang, is_integer}, to_arg}]},
@@ -18,9 +19,10 @@
   {input_audio_channels,   input,  "-ac",                    [{{vice_prv_options, is_list_and_integer}, to_dotargs}, {{erlang, is_integer}, to_arg}]},
   {input_acodec,           input,  "-acodec",                [{{erlang, is_list}, to_arg}, {{erlang, is_binary}, to_arg}]},
   {guess_layout_max,       input,  "-guess_layout_max",      [{{erlang, is_integer}, to_arg}]},
+  {input_vcodec,           input,  "-vcodec",                [{{erlang, is_list}, to_arg}, {{erlang, is_binary}, to_arg}]},
   {input_scodec,           input,  "-scodec",                [{{erlang, is_list}, to_arg}, {{erlang, is_binary}, to_arg}]},
-  {muxdelay,               input,  "-muxdelay",              [{{erlang, is_integer}, to_arg}]},
-  {muxpreload,             input,  "-muxpreload",            [{{erlang, is_integer}, to_arg}]},
+  {muxdelay,               input,  "-muxdelay",              [{{erlang, is_float}, to_arg}, {{erlang, is_integer}, to_arg}]},
+  {muxpreload,             input,  "-muxpreload",            [{{erlang, is_float}, to_arg}, {{erlang, is_integer}, to_arg}]},
   {accurate_seek,          input,  "-accurate_seek",         [{{vice_prv_options, is_true}, to_nothing}]},
 
   {output_format,          output, "-f",                     [{{erlang, is_list}, to_arg}, {{erlang, is_binary}, to_arg}]},

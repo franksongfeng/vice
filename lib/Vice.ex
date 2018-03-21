@@ -21,6 +21,9 @@ defmodule Vice do
   def unquote(:"info")(arg1, arg2) do
     :erlang.apply(:"vice", :"info", [arg1, arg2])
   end
+  def unquote(:"info")(arg1, arg2, arg3) do
+    :erlang.apply(:"vice", :"info", [arg1, arg2, arg3])
+  end
   def unquote(:"status")(arg1) do
     :erlang.apply(:"vice", :"status", [arg1])
   end
@@ -51,9 +54,6 @@ defmodule Vice do
   def unquote(:"thumbnails")(arg1, arg2, arg3) do
     :erlang.apply(:"vice", :"thumbnails", [arg1, arg2, arg3])
   end
-  def unquote(:"thumbnails_finalize")(arg1, arg2) do
-    :erlang.apply(:"vice", :"thumbnails_finalize", [arg1, arg2])
-  end
   def unquote(:"to_html5_webm")(arg1, arg2) do
     :erlang.apply(:"vice", :"to_html5_webm", [arg1, arg2])
   end
@@ -71,23 +71,5 @@ defmodule Vice do
   end
   def unquote(:"to_html5_ogg")(arg1, arg2, arg3) do
     :erlang.apply(:"vice", :"to_html5_ogg", [arg1, arg2, arg3])
-  end
-  def unquote(:"init")(arg1) do
-    :erlang.apply(:"vice", :"init", [arg1])
-  end
-  def unquote(:"handle_call")(arg1, arg2, arg3) do
-    :erlang.apply(:"vice", :"handle_call", [arg1, arg2, arg3])
-  end
-  def unquote(:"handle_cast")(arg1, arg2) do
-    :erlang.apply(:"vice", :"handle_cast", [arg1, arg2])
-  end
-  def unquote(:"handle_info")(arg1, arg2) do
-    :erlang.apply(:"vice", :"handle_info", [arg1, arg2])
-  end
-  def unquote(:"terminate")(arg1, arg2) do
-    :erlang.apply(:"vice", :"terminate", [arg1, arg2])
-  end
-  def unquote(:"code_change")(arg1, arg2, arg3) do
-    :erlang.apply(:"vice", :"code_change", [arg1, arg2, arg3])
   end
 end
