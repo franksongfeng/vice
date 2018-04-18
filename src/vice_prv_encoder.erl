@@ -80,7 +80,6 @@ handle_cast({convert, In, Out, Options, Multi, Fun, From}, #state{type = Type,
     {ok, NOptions} ->
       case erlang:apply(Encoder, command, [EncoderState, In, Out, NOptions, Multi]) of
         {ok, Cmd} ->
-          lager:debug("COMMAND : ~p", [Cmd]),
           Ref = erlang:make_ref(),
           vice_prv_status:insert(Ref, self()),
           case Fun of
@@ -90,9 +89,9 @@ handle_cast({convert, In, Out, Options, Multi, Fun, From}, #state{type = Type,
               gen_server:reply(From, {async, Ref})
           end,
           case vice_command:exec(Cmd, Encoder, Ref) of
-            {ok, _, _} ->
+            {ok, _} ->
               vice_utils:reply(Fun, From, {ok, In, Out});
-            {error, Code, _} ->
+            {error, Code} ->
               vice_utils:reply(Fun, From, {error, In, Out, Code})
           end,
           vice_prv_status:delete(Ref);

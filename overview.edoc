@@ -62,8 +62,8 @@ For video conversion, VICE use <a href="https://www.ffmpeg.org">FFmpeg</a>.
 <td>global</td>
 <td><tt>filter_complex</tt></td>
 <td>Define a complex filtergraph, i.e. one with arbitrary number of inputs and/or outputs.</td>
-<td><tt><a href="https://www.ffmpeg.org/ffmpeg-all.html#Filtergraph-syntax-1">filtergraph</a> :: string() | binary()</tt></td>
-<td><tt>{filter_complex, "acrossfade=d=10:c1=exp:c2=exp"}</tt></td>
+<td><tt><a href="https://www.ffmpeg.org/ffmpeg-all.html#Filtergraph-syntax-1">Filtergraph</a> :: string() | binary() | proplist()</tt></td>
+<td><tt>{filter_complex, [{"acrossfade", "d=10"}, {"c1", "exp"}, {"c2", "exp"}]}</tt></td>
 </tr>
 <tr>
 <td>global</td>
@@ -84,21 +84,28 @@ For video conversion, VICE use <a href="https://www.ffmpeg.org">FFmpeg</a>.
 <td><tt>input_position</tt></td>
 <td>Seeks in this input file to <i>position</i>.</td>
 <td><tt><a href="https://www.ffmpeg.org/ffmpeg-utils.html#time-duration-syntax">position</a> :: string() | binary()</tt></td>
-<td><tt>{input_position, "00:01:02.123}</tt></td>
+<td><tt>{input_position, "00:01:02.123"}</tt></td>
 </tr>
 <tr>
 <td>input</td>
 <td><tt>input_eof_position</tt></td>
 <td>Like the <tt>input_position</tt> option but relative to the "end of file". That is negative values are earlier in the file, 0 is at EOF. .</td>
 <td><tt><a href="https://www.ffmpeg.org/ffmpeg-utils.html#time-duration-syntax">position</a> :: string() | binary()</tt></td>
-<td><tt>{input_eof_position, "-0:32:01.123}</tt></td>
+<td><tt>{input_eof_position, "-0:32:01.123"}</tt></td>
+</tr>
+<tr>
+<td>input</td>
+<td><tt>input_format</tt></td>
+<td>Force input format.</td>
+<td><tt>Format :: string()</tt></td>
+<td><tt>{input_format, "mp4"}</tt></td>
 </tr>
 <tr>
 <td>input</td>
 <td><tt>input_duration</tt></td>
 <td>Limit the duration of data read from the input file.</td>
 <td><tt><a href="https://www.ffmpeg.org/ffmpeg-utils.html#time-duration-syntax">position</a> :: string() | binary()</tt></td>
-<td><tt>{input_duration, "0:32:01.123}</tt></td>
+<td><tt>{input_duration, "0:32:01.123"}</tt></td>
 </tr>
 <tr>
 <td>input</td>
@@ -208,85 +215,78 @@ For video conversion, VICE use <a href="https://www.ffmpeg.org">FFmpeg</a>.
 <tr>
 <td>output</td>
 <td><tt>output_format</tt></td>
-<td></td>
-<td><tt></tt></td>
-<td><tt></tt></td>
+<td>Force output format.</td>
+<td><tt>Format :: string()</tt></td>
+<td><tt>{output_format, "mp4"}</tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>output_duration</tt></td>
-<td></td>
-<td><tt></tt></td>
-<td><tt></tt></td>
+<td>Limit the duration of data read from the output file.</td>
+<td><tt><a href="https://www.ffmpeg.org/ffmpeg-utils.html#time-duration-syntax">position</a> :: string() | binary()</tt></td>
+<td><tt>{output_duration, "0:32:01.123}</tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>output_position</tt></td>
-<td></td>
-<td><tt></tt></td>
-<td><tt></tt></td>
+<td>Seeks in this output file to <i>position</i>.</td>
+<td><tt><a href="https://www.ffmpeg.org/ffmpeg-utils.html#time-duration-syntax">position</a> :: string() | binary()</tt></td>
+<td><tt>{output_position, "00:01:02.123}</tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>output_eof_position</tt></td>
-<td></td>
-<td><tt></tt></td>
-<td><tt></tt></td>
+<td>Like the <tt>output_position</tt> option but relative to the "end of file". That is negative values are earlier in the file, 0 is at EOF. .</td>
+<td><tt><a href="https://www.ffmpeg.org/ffmpeg-utils.html#time-duration-syntax">position</a> :: string() | binary()</tt></td>
+<td><tt>{output_eof_position, "-0:32:01.123}</tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>encoder</tt></td>
-<td></td>
-<td><tt></tt></td>
-<td><tt></tt></td>
+<td>Select a encoder for one or more streams.</td>
+<td><tt>[Stream :: string(), Codec :: string()] | Codec :: string()</tt></td>
+<td><tt>{encoder, ["a", "pcm_s161e"]}</tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>bitrate</tt></td>
-<td></td>
-<td><tt></tt></td>
-<td><tt></tt></td>
+<td>Set bitrate.</td>
+<td><tt>[Stream :: string(), Bitrate :: string()] | [Stream :: string(), Number :: integer(), Bitrate :: string()] | Bitrate :: string() | integer()</tt></td>
+<td><tt>{bitrate, ["v", 0, "800k"]}</tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>timestamp</tt></td>
-<td></td>
-<td><tt></tt></td>
+<td>Set the recording timestamp in the container.</td>
+<td><tt>Date :: date()</tt></td>
 <td><tt></tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>target</tt></td>
-<td></td>
-<td><tt></tt></td>
-<td><tt></tt></td>
-</tr>
-<tr>
-<td>output</td>
-<td><tt>dframes</tt></td>
-<td></td>
-<td><tt></tt></td>
-<td><tt></tt></td>
+<td>Specify target file type (<tt>vcd</tt>, <tt>svcd</tt>, <tt>dvd</tt>, <tt>dv</tt>, <tt>dv50</tt>). type may be prefixed with <tt>pal-</tt>, <tt>ntsc-</tt> or <tt>film-</tt> to use the corresponding standard.</td>
+<td><tt>Target :: string()</tt></td>
+<td><tt>{target, "vcd"}</tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>frames</tt></td>
-<td></td>
-<td><tt></tt></td>
-<td><tt></tt></td>
+<td>Stop writing to the stream after framecount frames.</td>
+<td><tt>[Stream :: string(), Framecount :: integer()] | Framecount :: integer()</tt></td>
+<td><tt>{frames, ["v", 1]}</tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>qscale</tt></td>
-<td></td>
-<td><tt></tt></td>
+<td>Use fixed quality scale (VBR).</td>
+<td><tt>[Stream :: string(), Quality :: integer()] | [Stream :: string(), Number :: integer(), Quality :: integer()] | Quality :: integer()</tt></td>
 <td><tt></tt></td>
 </tr>
 <tr>
 <td>output</td>
 <td><tt>filter</tt></td>
-<td></td>
-<td><tt></tt></td>
+<td>Create the filtergraph specified by filtergraph and use it to filter the stream.</td>
+<td><tt>[Stream :: string(), <a href="https://www.ffmpeg.org/ffmpeg-all.html#Filtergraph-syntax-1">Filtergraph</a> :: string()]</tt></td>
 <td><tt></tt></td>
 </tr>
 <tr>
@@ -661,7 +661,8 @@ For audio conversion, VICE use <a href="http://sox.sourceforge.net/">SoX</a>.
 
 <h4>Options</h4>
 
-<table>
+<table width="100%" border="0" summary="video conversion options">
+<tr><th>Type</th><th>Name</th><th>Description</th><th>Value</th><th>Example</th></tr>
 <tr>
 <td>global</td>
 <td><tt>buffer</tt> or <tt>input_buffer</tt></td>
@@ -950,7 +951,8 @@ For image conversion, VICE use <a href="https://www.imagemagick.org">ImageMagick
 
 <h4>Options</h4>
 
-<table>
+<table width="100%" border="0" summary="video conversion options">
+<tr><th>Type</th><th>Name</th><th>Description</th><th>Value</th><th>Example</th></tr>
 <tr>
 <td>convert</td>
 <td><tt>resize</tt></td>

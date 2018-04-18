@@ -80,7 +80,7 @@ thumbnails_finalize({error, _, _, Code}, _) ->
   lager:error("Failed to generate thumbnails: ~p", [Code]).
 
 allowed_extensions(Movie) ->
-  case string:lowercase(bucs:to_string(filename:extension(Movie))) of
+  case bucstring:lowercase(bucs:to_string(filename:extension(Movie))) of
     ".m3u8" -> [{allowed_extensions, "ALL"}];
     ".mpd" -> [{allowed_extensions, "ALL"}];
     _Ext -> []
