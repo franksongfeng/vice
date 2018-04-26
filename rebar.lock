@@ -1,7 +1,7 @@
 {"1.1.0",
 [{<<"bucs">>,
   {git,"git://github.com/G-Corp/bucs.git",
-       {ref,"79a04b120137301304265c97cf6af1622f4293d2"}},
+       {ref,"b5a6f20538045de1c3ab65982aa471208ede1725"}},
   0},
  {<<"doteki">>,{pkg,<<"doteki">>,<<"1.0.6">>},0},
  {<<"goldrush">>,{pkg,<<"goldrush">>,<<"0.1.9">>},1},

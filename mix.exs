@@ -28,7 +28,7 @@ defmodule Vice.Mixfile do
   defp deps do
     [
       {:lager, "~> 3.6.1"},
-      {:bucs, ~r//, git: "git://github.com/G-Corp/bucs.git", branch: "master"},
+      {:bucs, "~> 1.0.15"},
       {:doteki, "~> 1.0.6"},
       {:poolgirl, "~> 1.1.3"},
       {:jsx, "~> 2.9.0"}
