@@ -19,7 +19,7 @@ VICE is a fork and rewrite of [erlffmpeg](https://github.com/emedia-project/erlf
 
 #### Install ####
 
-[cmake](https://cmake.org/), [ffmpeg](https://www.ffmpeg.org/)|[libav](https://www.libav.org/), [libopencv-dev](http://opencv.org/), [imagemagick](https://www.imagemagick.org/script/index.php)
+[cmake](https://cmake.org/), [ffmpeg](https://www.ffmpeg.org/)|[libav](https://www.libav.org/), [libopencv-dev](http://opencv.org/), [imagemagick](https://www.imagemagick.org/script/index.php), [SoX](http://sox.sourceforge.net/)
 
 
 #### Example ####
