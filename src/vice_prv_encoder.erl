@@ -26,8 +26,9 @@ start_link(Type, Encoders) ->
   gen_server:start_link(?MODULE, {Type, Encoders}, []).
 
 % @hidden
-init({_, []}) ->
-  {stop, missing_encoder};
+init({Type, []}) ->
+  lager:info("~ts encoder not available !", [Type]),
+  ignore;
 init({Type, [Encoder|Rest]}) ->
   case erlang:apply(Encoder, init, []) of
     {ok, State} ->

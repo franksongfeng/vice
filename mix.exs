@@ -30,7 +30,7 @@ defmodule Vice.Mixfile do
       {:lager, "~> 3.6.1"},
       {:bucs, "~> 1.0.15"},
       {:doteki, "~> 1.0.6"},
-      {:poolgirl, "~> 1.1.3"},
+      {:poolgirl, "~> 1.2.0"},
       {:jsx, "~> 2.9.0"}
     ]
   end

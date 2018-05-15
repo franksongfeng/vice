@@ -291,7 +291,8 @@ start_encoders(Type) ->
     Encoders ->
       case poolgirl:add_pool(Type, {vice_prv_encoder,
                                     start_link,
-                                    [Type, Encoders]}) of
+                                    [Type, Encoders]},
+                             #{allow_empty_pool => false}) of
         {ok, N} ->
           lager:debug("~p ~p encoder started!", [N, Type]),
           true;
